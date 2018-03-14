@@ -1,6 +1,7 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import { resolvers } from './resolver';
 import Astronaute from './typedefs/astronaute';
+import AstronauteInput from './typedefs/astronauteInput';
 import Planet from './typedefs/planet';
 import Grade from './typedefs/grade';
 
@@ -12,13 +13,20 @@ const RootQuery = `
   }
 `;
 
+const RootMutation = `
+  type RootMutation {
+    saveAstronaute(input: AstronauteInput!): Astronaute
+  }
+`;
+
 const SchemaDefinition = `
   schema {
-    query: RootQuery
+    query: RootQuery,
+    mutation: RootMutation
   }
 `;
 
 export default makeExecutableSchema({
-    typeDefs: [SchemaDefinition, RootQuery, Astronaute, Planet, Grade],
+    typeDefs: [SchemaDefinition, RootQuery, RootMutation, AstronauteInput, Astronaute, Planet, Grade],
     resolvers: resolvers,
 });

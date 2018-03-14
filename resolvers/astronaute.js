@@ -2,6 +2,12 @@ import pg from './../pg';
 import Astronaute from '../typedefs/astronaute';
 
 const resolvers = {
+    RootMutation: {
+        async saveAstronaute(value, { input }, context, infos) {
+            const astronaute = await pg('astronaute').returning(['id', 'pseudo']).insert(input);
+            return astronaute.pop();
+        }
+    },
     RootQuery: {
         async astronautes() {
             return await pg.select().table('astronaute');
