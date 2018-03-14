@@ -19,5 +19,6 @@ services:
         environment:
             POSTGRES_PASSWORD: pg
             POSTGRES_USER: pg
+            POSTGRES_DB: graphql
         ports:
-          - 5433:5433
+          - 5433:5432
