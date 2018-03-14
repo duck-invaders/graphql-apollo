@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+    node:
+        image: node:latest
+        working_dir: /home/node/app
+        environment:
+          - NODE_ENV=dev
+        volumes:
+          - ./:/home/node/app
+        ports:
+          - 3000:3000
+        command: "yarn start"
+        links:
+            - pg
+    pg:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: pg
+            POSTGRES_USER: pg
+        ports:
+          - 5433:5433
